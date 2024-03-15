@@ -121,8 +121,8 @@
             background: lavender;
         } 
         .image2{
-            margin-top: 20px;
-            width: 10%;
+            margin-top: 0px;
+            width: 5%;
             height: 5%;
             margin-left: 45%;
         } 
@@ -140,18 +140,16 @@
             text-align: center;
             text-transform: none;
         }  
-        p .para{
-            font-weight: 200px;
-            text-align: center;
-            text-transform: none;
-        }
+      
         .sub-cont h4{
             padding: 1rem;
             text-align: center;
             color: rgb(248, 9, 9);
             justify-content: center;
         }
-        
+        .para {
+            text-align: center; /* Center text within the paragraph */
+        }
         ul {
             list-style-type: none;
             padding: 0;
@@ -204,8 +202,8 @@
 
     .sub-pop p {
         display: flex;
-        padding: 0.5rem;
-        margin: 0.2rem;
+        padding: 0.7rem;
+        margin: 1rem;
     }
 
     .sub-pop i {
@@ -226,6 +224,21 @@
         padding: 5px;
         text-decoration: underline;
     }
+
+
+    .welcome-section {
+    margin: 40px;
+    padding: 40px;
+    background-color: darkgrey;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%; /* Set the width to 70% of the viewport */
+    margin: auto; /* Center the section horizontally */
+    position: absolute; /* Position absolutely for centering */
+    top: 50%; /* Move the top of the section to the vertical center */
+    left: 50%; /* Move the left of the section to the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust position to center both horizontally and vertically */
+}
 
 
 
@@ -257,17 +270,24 @@
         <br><br>
         <div class="" style="margin-top: 3rem;" id="icon">
                 <img src="kmu.jpeg" class="image2" alt="KeMU Image" style="border-radius:50%;">        
-                <h1 style="text-align: center;">Welcome to Kenya Methodist University Security System</h1>
+              
+                <div class="welcome-section">
+    <h1 style="text-align: center;">Welcome to Kenya Methodist University Security System</h1>
 
-                <p class="para"><br> This is a security system that will entirely enable all the stakeholders in this great University 
-                to get immediate reports in regards to Security matters in this Institution. 
-                We are here to cater for your security and 
-                your well-being in this institution. Thank you! </p>
+    <p class="para"><br> This is a security system that will entirely enable all the stakeholders in this great University 
+    to get immediate reports in regards to Security matters in this Institution. <br>
+    We are here to cater for your security and your well-being in this institution. Thank you! </p>
+    <br>
+    <h2>Our Security Matters!</h2>
+        <h3>The Future is Here!</h3>
+</div>
+
+
+
         </div>
     <br>
     <br>
-        <h2>Our Security Matters!</h2>
-        <h3>The Future is Here!</h3>
+      
     
         <!-- Popup -->
         <div class="popup" id="pop">

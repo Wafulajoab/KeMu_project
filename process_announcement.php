@@ -30,6 +30,7 @@ $sql = "INSERT INTO announcements (announcement_content, file) VALUES ('$announc
 // Execute SQL statement
 if ($conn->query($sql) === TRUE) {
     echo "Announcement created successfully";
+    header("Location: admin_announcements.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

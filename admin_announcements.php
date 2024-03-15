@@ -15,16 +15,6 @@
             flex-direction: column;
         }
         .navbar {
-    background-color: purple;
-    padding: 20px 0;
-    text-align: center;
-    position: fixed; /* Set the navbar to be fixed */
-    width: 100%; /* Ensure the navbar spans the entire width of the viewport */
-    top: 0; /* Position it at the top */
-    left: 0; /* Ensure it's aligned to the left */
-    z-index: 1000; /* Ensure it's above other content */
-  }
-         .navbar {
             background-color: purple;
             padding: 20px 0;
             text-align: center;
@@ -40,7 +30,6 @@
             font-size: 24px;
             margin: 0;
         }
-
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -103,7 +92,6 @@
             text-decoration: underline;
             font-weight: bold;
         }
-
         .button {
             background-color: #444;
             color: white;
@@ -115,12 +103,10 @@
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
             border-radius: 4px;
         }
-
         .button:hover {
             background-color: green;
             color: white;
         }
-
         .button:active {
             transform: translateY(1px);
         }
@@ -133,28 +119,38 @@
             width: 100%; /* Set the width of the image to 100% of the div's width */
             height: auto; /* Maintain the aspect ratio */
         }
-
-        .logout-btn {
-            background-color: red;
-            border-color: darkred;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 25px;
-         
-          
+        /* Hover effect for Go Back button */
+        #go-back-btn:hover {
+            background-color: navy;
+            border-color: darkslateblue;
         }
-
-        .go-back-btn {
-            background-color: blue;
-            border-color: darkblue;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 25px;
-           
-            
-
+        /* Hover effect for Logout button */
+        .logout-btn:hover {
+            background-color: darkred;
+            border-color: firebrick;
         }
-  </style>
+        .right-section {
+            width: calc(50% - 20px);
+            margin-left: 20px;
+            height: 400px; /* Set a fixed height */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+        .right-section {
+            position: relative;
+            width: calc(50% - 20px);
+            margin-left: 20px;
+            height: 650px;
+            overflow-y: auto;
+        }
+        .fixed-title {
+            position: sticky;
+            top: 0px; /* Adjust as needed based on your design */
+            background-color: #f4f4f4; /* Set background color to match the container background */
+            z-index: 1;
+            padding: 10px;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
@@ -167,60 +163,66 @@
     <div class="container">
         <div class="left-section">
             <h2>Create Announcement</h2>
-            <form action="process_announcement.php" method="post" enctype="multipart/form-data" onsubmit="return showPopup()">
+            <form action="process_announcement.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <label for="announcement_content">Announcement Content:</label>
                 <textarea id="announcement_content" name="announcement_content" rows="4" cols="50"></textarea>
-                <label for="file">Upload File:</label>
-                <input type="file" id="file" name="file">
                 <input type="submit" value="Submit" class="button">
             </form>
         </div>
 
         <div class="right-section">
-            <h2>Recent Announcements</h2>
+            <h2 class="fixed-title">Recent Announcements</h2>
             <?php
-            // PHP code to fetch and display recent announcements
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "kemu"; // Database name
+// PHP code to fetch and display all announcements
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "kemu"; // Database name
 
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-            // Fetch recent announcements from the database
-            $sql = "SELECT * FROM announcements ORDER BY announcement_date DESC LIMIT 5"; // Change the limit as needed
-            $result = $conn->query($sql);
+// Fetch all announcements from the database
+$sql = "SELECT * FROM announcements ORDER BY announcement_date DESC"; // Removed the LIMIT clause
+$result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                // Output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo "<div class='announcement'>";
-                    echo "<p>" . $row["announcement_content"] . "</p>";
-                    echo "<p>Date and Time: " . $row["announcement_date"] . "</p>"; // Display date and time
-                    echo "<div class='edit-delete'>";
-                    echo "<a href='#'>Edit</a> | <a href='#'>Delete</a>";
-                    echo "</div>";
-                    echo "</div>";
-                }
-            } else {
-                echo "No announcements available.";
-            }
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while ($row = $result->fetch_assoc()) {
+        echo "<div class='announcement'>";
+        echo "<div style='display: flex; align-items: center;'>"; // Flex container for image and username
+        echo "<img src='kmu.jpeg' alt='Profile Icon' style='width: 45px; height: 45px; border-radius: 50%;'>";
+        echo "<p style='margin-left: 10px;'><strong> Chief Security Officer (CSO)</strong></p>"; // Username CSO in bold
+        echo "</div>";
+        echo "<p>" . $row["announcement_content"] . "</p>";
+        echo "<p> " . $row["announcement_date"] . "</p>"; // Display date and time
+        echo "<div class='edit-delete'>";
+        echo "<a href='#'>Edit</a> | <a href='#'>Delete</a>";
+        echo "</div>";
+        echo "</div>";
+        
+    }
+} else {
+    echo "No announcements available.";
+}
 
-            $conn->close();
-            ?>
+$conn->close();
+?>
+
         </div>
     </div>
 
     <div>
-    <a href="#" onclick="history.go(-1);" id="go-back-btn">Go Back</a>
-    <button class="button logout-btn">Logout</button>
- 
+        <button onclick="history.go(-1);" id="go-back-btn" style="background-color: blue; border-color: darkblue; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Go Back</button>
+
+        <button class="button logout-btn" style="background-color: red; border-color: darkred; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Logout</button>
+    </div>
+
     </div>
     <br><br><br><br><br>
     <footer class="footer">
@@ -228,9 +230,13 @@
     </footer>
 
     <script>
-        function showPopup() {
-            alert("Submitted Successfully");
-            return true; // Return true to allow form submission
+        function validateForm() {
+            var announcementContent = document.getElementById("announcement_content").value.trim();
+            if (announcementContent === '') {
+                alert("Please enter the announcement content.");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
         }
     </script>
 </body>

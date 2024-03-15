@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Database connection parameters
 $servername = "localhost";
 $username = "root";
@@ -30,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify the password
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
+            // $_SESSION['admin_id'] = $admin['id']; // Assuming id is the primary key of admins table
+            $_SESSION['username'] = $row['username'];
             // Login successful, redirect to admin dashboard
             header("Location: admin_dashboard.php");
             exit();

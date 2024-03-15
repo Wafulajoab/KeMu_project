@@ -1,3 +1,10 @@
+<?php
+// Start the session
+session_start();
+$username = $_SESSION['username'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -159,7 +166,8 @@
             <div class="image" style="text-align: center;">
                 <img src="kmu.jpeg" class="image2" alt="KeMU Image" style="max-width: 20%; height: auto;">
             </div>
-            <h2>Admin Panel Dashboard</h2>
+            <h2><?php echo $username ?> 
+            <br>Admin Panel Dashboard</h2>
             <ul>
                 <li><a href="displayadmins.php">Admins</a></li>
                 <li><a href="display_users.php">User Management</a></li>
