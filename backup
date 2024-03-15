@@ -1,0 +1,344 @@
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "kemu";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL query to create announcements table
+$sql_create_table = "CREATE TABLE IF NOT EXISTS announcements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    announcement_text TEXT NOT NULL,
+    file_name VARCHAR(255),
+    file_path VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
+// Execute table creation query
+if ($conn->query($sql_create_table) === TRUE) {
+    echo "Table 'announcements' created successfully<br>";
+} else {
+    echo "Error creating table: " . $conn->error;
+}
+
+// Function to handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $announcementText = $_POST['announcementText'];
+    $username = "User123"; // Replace with actual username retrieval logic
+
+    // File upload handling
+    $file_name = $_FILES['fileInput']['name'];
+    $file_tmp_name = $_FILES['fileInput']['tmp_name'];
+    $file_destination = "uploads/" . $file_name;
+
+    if (!empty($announcementText) || !empty($file_name)) {
+        // Insert announcement into database
+        $sql_insert_announcement = "INSERT INTO announcements (username, announcement_text, file_name, file_path) VALUES ('$username', '$announcementText', '$file_name', '$file_destination')";
+        
+        if ($conn->query($sql_insert_announcement) === TRUE) {
+            // Move uploaded file to destination folder
+            move_uploaded_file($file_tmp_name, $file_destination);
+            echo "Announcement inserted successfully<br>";
+        } else {
+            echo "Error: " . $sql_insert_announcement . "<br>" . $conn->error;
+        }
+    }
+}
+
+// Fetch announcements from database
+$sql_fetch_announcements = "SELECT * FROM announcements ORDER BY created_at DESC";
+$result = $conn->query($sql_fetch_announcements);
+
+$announcements = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $announcements[] = $row;
+    }
+}
+
+// Function to delete announcement
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+
+    // Delete announcement from database
+    $sql_delete_announcement = "DELETE FROM announcements WHERE id=$id";
+    if ($conn->query($sql_delete_announcement) === TRUE) {
+        // Delete file from server
+        $file_path = $_POST['file_path'];
+        unlink($file_path);
+        echo "Announcement deleted successfully<br>";
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+
+// Close database connection
+$conn->close();
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body {
+            background: rgba(244, 244, 247, 0.973);
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Use flexbox for layout */
+            height: 100vh; /* Full height */
+        }
+
+        .left-panel,
+        .right-panel {
+            flex: 1; /* Equal width for both panels */
+            padding: 70px; /* Adjust padding as needed */
+            overflow-y: auto; /* Enable scrolling if content exceeds panel height */
+        }
+
+        /* Styles for left panel */
+        .left-panel {
+            background-color: darkgrey;
+        }
+
+        /* Styles for right panel */
+        .right-panel {
+            background-color: lavenderblush;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        /* Style for announcement form */
+        #announcementForm {
+            margin-bottom: 20px;
+        }
+
+        /* Styles for individual announcements */
+        .announcement {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px; /* Adjust max-width as needed */
+        }
+
+
+        .navbar ul li a::after {
+            position: absolute;
+            content: "";
+            bottom: 0;
+            left: 50%;
+            width: 0%;
+            height: 2px;
+            background-color: rgb(245, 243, 243);
+            transition: 0.4s ease-out;
+            align-items: center;
+        }
+
+        .navbar ul li a:hover::after {
+            /* width: 100%; */
+            left: 0;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            height: 10vh;
+        }
+
+        .container {
+            background-color: white;
+            width: 100%;
+            z-index: 100%;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: purple;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style-type: none;
+            top: 0;
+        }
+
+        .navbar ul li {
+            padding: .5rem;
+            margin: .5rem;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: rgb(250, 246, 246);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .navbar h2 {
+            font-size: 1.5rem;
+            padding: 0.5px;
+            margin: 1.5rem;
+            font-family: Arial, sans-serif;
+            color: rgb(250, 245, 245);
+        }
+
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: lavender;
+            text-align: center;
+            padding: 0.1rem;
+        }
+
+        .footer p {
+            justify-content: center;
+        }
+
+        .footer a {
+            color: green;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        #announcementForm button {
+            background-color: purple;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #announcementForm button:hover {
+            background-color: #6a1b9a;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <div class="navbar">
+            <h2>KEMU SECURITY SYSTEM</h2>
+            <ul>
+            <li><a href="index.php"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="visitors_records.php"><i class="fas fa-book"></i> Visitors-records</a></li>
+            <li><a href="incidents.php"><i class="fas fa-exclamation-triangle"></i> Incidents</a></li>
+            <li><a href="announcements.php"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            <li><a href="cso_announcements.php"><i class="fas fa-bullhorn"></i> C.S.O</a></li>
+            <li><a href="contact.php"><i class="fas fa-address-book"></i> Contacts</a></li>
+            <li><a href="about.php"><i class="fas fa-info-circle"></i> About</a></li> 
+     
+             </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="left-panel">
+    <h3>Post Announcement</h3>
+    <form id="announcementForm" method="POST" enctype="multipart/form-data">
+        <textarea id="announcementText" name="announcementText" placeholder="Write your announcement here..."></textarea>
+        <input type="file" id="fileInput" name="fileInput" accept=".pdf">
+        <button type="submit">Post Announcement</button>
+    </form>
+</div>
+
+<div class="right-panel">
+    <h3>Announcements</h3>
+    <div id="announcementsList">
+        <!-- Announcements will be dynamically added here -->
+        <?php
+        if (!empty($announcements)) {
+            foreach ($announcements as $announcement) {
+                echo "<div class='announcement'>";
+                echo "<i class='fas fa-user-circle profile-icon'></i>";
+                echo "<span class='username'>" . $announcement['username'] . "</span>: ";
+                echo "<span>" . $announcement['announcement_text'] . "</span>";
+                if (!empty($announcement['file_name'])) {
+                    echo "<a href='" . $announcement['file_path'] . "' download='" . $announcement['file_name'] . "'>Download PDF</a>";
+                }
+                echo "<button class='deleteButton' onclick='deleteAnnouncement(" . $announcement['id'] . ", \"" . $announcement['file_path'] . "\")'>Delete</button>";
+                echo "</div>";
+            }
+        } else {
+            echo "<p>No announcements available</p>";
+        }
+        ?>
+    </div>
+</div>
+
+<footer id="footer">
+    <div class="footer">
+        <p><span>Company.<strong>All Rights Reserved.</strong>Designed By <a href="jmtech.php">JMTech</a></span></p>
+    </div>
+</footer>
+
+<script>
+    function deleteAnnouncement(id, filePath) {
+        if (confirm("Are you sure you want to delete this announcement?")) {
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "");
+
+            var hiddenFieldId = document.createElement("input");
+            hiddenFieldId.setAttribute("type", "hidden");
+            hiddenFieldId.setAttribute("name", "id");
+            hiddenFieldId.setAttribute("value", id);
+
+            var hiddenFieldPath = document.createElement("input");
+            hiddenFieldPath.setAttribute("type", "hidden");
+            hiddenFieldPath.setAttribute("name", "file_path");
+            hiddenFieldPath.setAttribute("value", filePath);
+
+            var hiddenFieldDelete = document.createElement("input");
+            hiddenFieldDelete.setAttribute("type", "hidden");
+            hiddenFieldDelete.setAttribute("name", "delete");
+            hiddenFieldDelete.setAttribute("value", "true");
+
+            form.appendChild(hiddenFieldId);
+            form.appendChild(hiddenFieldPath);
+            form.appendChild(hiddenFieldDelete);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+</script>
+
+</body>
+</html>
