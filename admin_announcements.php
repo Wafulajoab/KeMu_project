@@ -162,7 +162,7 @@
     </div>
     <br><br><br><br>
     <div class="image">
-        <img src="kmu.jpeg" alt="KMU Logo">
+        <img src="kmu.jpeg" alt="KMU Logo" style="border-radius: 50px;">
     </div>
     <div class="container">
         <div class="left-section">
