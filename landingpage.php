@@ -74,7 +74,7 @@
 <body>
  
 <div class="navbar">
-    <!-- <a href="admin_register.php" class="button">Register as Admin</a> -->
+    <a href="admin_register.php" class="button">Register as Admin</a> 
     <a href="admin_login.php" class="button">Login as Admin</a>
     <a href="register.php" class="button">Register as User</a>
     <a href="login.php" class="button">Login as User</a>

@@ -1,4 +1,6 @@
 <?php
+require 'vendor/autoload.php'; // Include Composer's autoloader for PHPMailer
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -26,9 +28,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["reply_message"]) && is
     // Execute SQL statement
     if ($stmt->execute()) {
         // Admin reply recorded successfully
-        // Redirect to display_contact.php
-        header("Location: displaycontact.php");
-        exit(); // Stop further execution
+
+        // Fetch name and email from the database based on the message_id
+        $info_query = "SELECT name, email FROM messages WHERE id = ?";
+        $info_stmt = $conn->prepare($info_query);
+        $info_stmt->bind_param("i", $message_id);
+        $info_stmt->execute();
+        $info_stmt->bind_result($recipient_name, $recipient_email);
+        $info_stmt->fetch();
+        $info_stmt->close();
+
+        // Send email notification
+        $mail = new PHPMailer\PHPMailer\PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.elasticemail.com'; // Your SMTP host
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kemus863@gmail.com'; // Your SMTP username
+        $mail->Password = '90999C794011CB72B522A9DBECD16BF2221D'; // Your SMTP password
+        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 2525; // Your SMTP port
+        $mail->setFrom('kemus863@gmail.com', 'Kemu Security'); // Your email and name
+        $mail->addAddress($recipient_email); // Recipient email
+        $mail->Subject = 'Admin Reply Notification';
+        $mail->Body = 'Hello ' . $recipient_name ; 
+        $mail->Body .=  $reply_message ;
+        $mail->Body .= 'Best regards';
+        $mail->Body .= 'Kemu Security';
+
+        if ($mail->send()) {
+            // Email sent successfully
+            // Redirect to display_contact.php
+            header("Location: displaycontact.php?email_sent=1");
+            exit(); // Stop further execution
+        } else {
+            echo "Error sending email: " . $mail->ErrorInfo;
+        }
     } else {
         // Error recording admin reply
         echo "Error: " . $conn->error;

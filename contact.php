@@ -210,7 +210,7 @@
 
         <br>
 
-        <button type="submit" onclick="showMessage()"><i class="fas fa-paper-plane"></i> Submit</button>
+        <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
     </form>
 </div>
 
@@ -252,11 +252,7 @@
     </div>
 </footer>
 
-<script>
-    // Function to show the message sent confirmation
-    function showMessage() {
-        alert("Message Sent");
-    }
+<script src="https://smtpjs.com/v3/smtp.js">
 </script>
 </body>
 </html>

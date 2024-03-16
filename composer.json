@@ -1,0 +1,17 @@
+{
+    "name": "j.o.a.b/ke-mu",
+    "autoload": {
+        "psr-4": {
+            "JOAB\\KeMu\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wafulajoab",
+            "email": "joabfx22@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

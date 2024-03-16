@@ -88,7 +88,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row["created_at"] . "</td>";
         echo "<td class='reply-column'>
                 <form method='post' action='record_reply.php'>
-                    <textarea name='reply_message' rows='3' cols='30'></textarea>
+                    <textarea name='reply_message' rows='3' cols='30' required></textarea>
                     <input type='hidden' name='message_id' value='" . $row["id"] . "'>
                     <button type='submit' class='send-btn'>Send</button>
                 </form>
