@@ -48,19 +48,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["reply_message"]) && is
         $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 2525; // Your SMTP port
         $mail->setFrom('kemus863@gmail.com', 'Kemu Security'); // Your email and name
+
         $mail->addAddress($recipient_email); // Recipient email
         $mail->Subject = 'Admin Reply Notification';
-        $mail->Body = 'Hello ' . $recipient_name ; 
-        $mail->Body .=  $reply_message ;
-        $mail->Body .= 'Best regards';
-        $mail->Body .= 'Kemu Security';
 
+        // Construct the email body with spaces and line breaks
+        $mail->Body = 'Hello ' . $recipient_name . "\r\n"; // Two line breaks after the recipient name
+        $mail->Body .= $reply_message . "\r\n\r\n"; // Two line breaks after the reply message
+        $mail->Body .= 'Best regards' . "\r\n"; // One line break before "Best regards"
+        $mail->Body .= 'Kemu Security'; // No line break after "Kemu Security"
+
+        // Send the email
         if ($mail->send()) {
             // Email sent successfully
             // Redirect to display_contact.php
             header("Location: displaycontact.php?email_sent=1");
             exit(); // Stop further execution
         } else {
+            // Error sending email
             echo "Error sending email: " . $mail->ErrorInfo;
         }
     } else {

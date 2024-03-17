@@ -177,7 +177,7 @@
                 <img src="kmu.jpeg" alt="Logo">
             </div>
             <div class="button-container">
-                <button onclick="window.location.href='cso_announcements.php'"> Chief Security(CSO) Announcement</button>
+                <button onclick="window.location.href='cso_announcements.php'"> Chief Security Officer(CSO) Announcement</button>
                 <button onclick="window.location.href='normal_announcements.php'">Normal Announcements</button>
             </div>
         </div>

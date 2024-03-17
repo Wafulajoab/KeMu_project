@@ -165,7 +165,7 @@
             <h2>Create Announcement</h2>
             <form action="process_announcement.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <label for="announcement_content">Announcement Content:</label>
-                <textarea id="announcement_content" name="announcement_content" rows="4" cols="50"></textarea>
+                <textarea id="announcement_content" name="announcement_content" rows="4" cols="50" required></textarea>
                 <input type="submit" value="Submit" class="button">
             </form>
         </div>
@@ -218,9 +218,10 @@ $conn->close();
     </div>
 
     <div>
-        <button onclick="history.go(-1);" id="go-back-btn" style="background-color: blue; border-color: darkblue; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Go Back</button>
+        <button onclick="history.go(1);" id="go-back-btn" style="background-color: blue; border-color: darkblue; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Go Back</button>
 
-        <button class="button logout-btn" style="background-color: red; border-color: darkred; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Logout</button>
+        <a href="logout.php" class="button logout-btn" style="background-color: red; border-color: darkred; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Logout</a>
+
     </div>
 
     </div>
@@ -228,15 +229,15 @@ $conn->close();
     <footer class="footer">
         <p><span>Company.<strong>All Rights Reserved.</strong>Designed By <a href="jmtech.php">JMTech</a></span></p>
     </footer>
-
     <script>
-        function validateForm() {
-            var announcementContent = document.getElementById("announcement_content").value.trim();
-            if (announcementContent === '') {
-                alert("Please enter the announcement content.");
-                return false; // Prevent form submission
-            }
-            return true; // Allow form submission
+        // JavaScript function to go back to the previous page
+        function goBack(-1) {
+            window.history.back();
+        }
+
+        // JavaScript function to logout and redirect to landingpage.php
+        function logout() {
+            window.location.href = "landingpage.php";
         }
     </script>
 </body>

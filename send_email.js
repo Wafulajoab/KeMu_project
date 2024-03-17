@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() 
+{
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const submit = document.getElementById('submit');
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
         Email.send({
             SecureToken: "c4b30703-0898-4a81-a574-29a27db8a3bb",
-            To: 'tomnoezra@gmail.com',
+            To: 'joabfx22@gmail.com',
             From: email.value,
             Subject: "Form Submission",
             Body: emailBody

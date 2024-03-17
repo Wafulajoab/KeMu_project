@@ -58,7 +58,7 @@
 </nav>
 
 <div class="container">
-    <img src="kmu.jpeg" alt="KMU Logo" style="width: 15%; display: block; margin: 0 auto; padding-top: 0px; border-radius: 50px;">
+    <img src="kmu.jpeg" alt="KMU Logo" style="width: 15%; display: block; margin: 0 auto; padding-top: 0px; border-radius: 1000px;">
     <?php
         // PHP code to fetch and display all announcements
         $servername = "localhost";
