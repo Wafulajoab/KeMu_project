@@ -16,20 +16,36 @@
         }
         .navbar {
             background-color: purple;
-            padding: 20px 0;
+            padding: 30px 0;
             text-align: center;
-            position: fixed; /* Set the navbar to be fixed */
-            width: 100%; /* Ensure the navbar spans the entire width of the viewport */
-            top: 0; /* Position it at the top */
-            left: 0; /* Ensure it's aligned to the left */
-            z-index: 1000; /* Ensure it's above other content */
+            position: fixed;
+            /* Set the navbar to be fixed */
+            width: 100%;
+            /* Ensure the navbar spans the entire width of the viewport */
+            top: 0;
+            /* Position it at the top */
+            left: 0;
+            /* Ensure it's aligned to the left */
+            z-index: 1000;
+            /* Ensure it's above other content */
         }
-        .navbar p {
+
+        .navbar a {
             color: white;
+            text-decoration: none;
+            padding: 10px;
             font-weight: bold;
-            font-size: 24px;
-            margin: 0;
+            background-color: purple;
+            border-radius: 25px;
+            margin: 25px;
+            border: 2px solid white;
         }
+
+        .navbar a:active {
+            background-color: smokewhite;
+        }
+
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -153,9 +169,16 @@
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <p>KEMU SECURITY ANNOUNCEMENTS</p>
+<div class="navbar">
+        <a href='displayadmins.php'>Admins</a>
+        <a href='display_users.php'>User Management</a>
+        <a href='display_visitors.php'>Visitors Records</a>
+        <a href='admin_announcements.php'>Post Announcements</a>
+        <a href='incidentsadmin.php'>Incident Reports</a>
+        <a href='displaycontact.php'>Contacts</a>
     </div>
+
+    <div style='width: 80%; margin: 0 auto; padding-top: 50px;'> <!-- Adjust padding-top to accommodate navbar height -->
     <br><br><br><br>
     <div class="image">
         <img src="kmu.jpeg" alt="KMU Logo" style="border-radius: 50px;">
