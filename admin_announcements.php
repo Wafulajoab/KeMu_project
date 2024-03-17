@@ -218,9 +218,8 @@ $conn->close();
     </div>
 
     <div>
-        <button onclick="history.go(1);" id="go-back-btn" style="background-color: blue; border-color: darkblue; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Go Back</button>
-
-        <a href="logout.php" class="button logout-btn" style="background-color: red; border-color: darkred; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Logout</a>
+    <a href="javascript:history.go(-1);" id="go-back-link" style="background-color: blue; border-color: darkblue; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; text-decoration: none; display: inline-block; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Go Back</a>
+    <a href="logout.php" class="button logout-btn" style="background-color: red; border-color: darkred; margin: 10px; padding: 10px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Logout</a>
 
     </div>
 
