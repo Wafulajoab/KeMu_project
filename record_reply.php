@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["reply_message"]) && is
         // Construct the email body with spaces and line breaks
         $mail->Body = 'Hello ' . $recipient_name . "\r\n"; // Two line breaks after the recipient name
         $mail->Body .= $reply_message . "\r\n\r\n"; // Two line breaks after the reply message
-        $mail->Body .= 'Best regards' . "\r\n"; // One line break before "Best regards"
+        $mail->Body .= 'Regards:' . "\r\n"; // One line break before "Best regards"
         $mail->Body .= 'Kemu Security'; // No line break after "Kemu Security"
 
         // Send the email
