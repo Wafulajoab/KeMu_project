@@ -42,19 +42,30 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-right: 10px;
         }
         button:hover {
             background-color: #0056b3;
+        }
+        .go-back {
+            background-color: #ccc;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .go-back:hover {
+            background-color: #999;
         }
     </style>
 </head>
 <body>
     <h2>Add User</h2>
 
-   <div class="image" style="text-align: center;">
-    <img src="kmu.jpeg" class="image2" alt="KeMU Image" style="max-width: 80px; height: auto;">
-</div>
-
+    <div class="image" style="text-align: center;">
+        <img src="kmu.jpeg" class="image2" alt="KeMU Image" style="max-width: 80px; height: auto;">
+    </div>
 
     <form action="add_user_process.php" method="POST">
         <label for="username">Username:</label>
@@ -70,34 +81,35 @@
         <input type="text" id="campus" name="campus" required><br><br>
         
         <button type="submit">Add User</button>
+        <a href="javascript:history.back()" class="go-back">Go Back</a>
     </form>
+
+    <footer id="footer">
+        <style>
+            #footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: lavender;
+                text-align: center;
+                padding: 0.1rem;
+            }
+
+            .footer p {
+                justify-content: center;
+            }
+
+            .footer a {
+                color: green;
+                text-decoration: underline;
+                font-weight: bold;
+            }
+        </style>
+
+        <div class="footer">
+            <p><span>Company.<strong>All Rights Reserved.</strong>Designed By <a href="jmtech.php">JMTech</a></span></p>
+        </div>
+    </footer>
 </body>
-
-<footer id="footer">
-    <style>
-        #footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: lavender;
-            text-align: center;
-            padding: 0.1rem;
-        }
-
-        .footer p {
-            justify-content: center;
-        }
-
-        .footer a {
-            color: green;
-            text-decoration: underline;
-            font-weight: bold;
-        }
-    </style>
-
-    <div class="footer">
-        <p><span>Company.<strong>All Rights Reserved.</strong>Designed By <a href="jmtech.php">JMTech</a></span></p>
-    </div>
-</footer>
 </html>

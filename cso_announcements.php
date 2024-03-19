@@ -100,18 +100,18 @@
         }
 
         .announcements {
-    margin-top: 20px; /* Adjust according to your navbar and container height */
-    max-height: 70vh; /* Set maximum height for scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding-right: 15px; /* Add space for scrollbar */
-}
+            margin-top: 20px; /* Adjust according to your navbar and container height */
+            max-height: 70vh; /* Set maximum height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-right: 15px; /* Add space for scrollbar */
+        }
 
-.announcement {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-}
+        .announcement {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
 
     </style>
 </head>

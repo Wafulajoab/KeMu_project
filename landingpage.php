@@ -25,7 +25,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: purple;
+            background-color: transparent;
             padding: 20px 0;
             text-align: center;
             z-index: 1000; /* Ensure it's above other content */
@@ -50,7 +50,7 @@
 
         .button {
     background-color: transparent;
-    color: white;
+    color: black;
     text-decoration: none;
     font-weight: bold;
     border: 2px solid green;
@@ -82,10 +82,7 @@
 
         </div>
     </div>
-    <div class="container">
-        <h1>Welcome to KeMU Security System</h1>
-        <!--other content here -->
-    </div>
+  
     <footer id="footer">
     <style>
         #footer {

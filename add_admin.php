@@ -12,7 +12,7 @@
             background-color: #f4f4f4;
             display: flex;
             flex-direction: column; /* Change to column */
-            min-height: 100vh; /* Change to min-height */
+            min-height: 10vh; /* Change to min-height */
         }
         .container {
     flex: 1; /* Fill the remaining vertical space */
@@ -24,17 +24,8 @@
     margin: auto; /* Center align horizontally */
 }
 
-        .navbar {
-            background-color: purple;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
      
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        
         label {
             display: block;
             margin-bottom: 6px;
@@ -67,11 +58,7 @@
     </style>
 </head>
 <body>
-<div class="navbar">
-    <!-- <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a> -->
-</div>
+
 <br>
 <div class="container">
     <div class="image" style="text-align: center;">
@@ -105,6 +92,18 @@
 <br><br>
 
 
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.textContent = type === 'password' ? 'Show' : 'Hide';
+    });
+</script>
+
+
 <footer id="footer">
     <style>
         #footer {
@@ -132,15 +131,5 @@
         <p><span>Company.<strong>All Rights Reserved.</strong>Designed By <a href="jmtech.php">JMTech</a></span></p>
     </div>
 </footer>
-<script>
-    const togglePassword = document.getElementById('togglePassword');
-    const password = document.getElementById('password');
-
-    togglePassword.addEventListener('click', function () {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        this.textContent = type === 'password' ? 'Show' : 'Hide';
-    });
-</script>
 </body>
 </html>

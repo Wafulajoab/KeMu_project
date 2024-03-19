@@ -29,7 +29,7 @@ $username = $_SESSION['username'];
 
         .admin-panel {
             flex: 1; /* Expand to fill remaining vertical space */
-            padding: 2px;
+            padding: 20px;
             max-width: 400px;
             margin: 0 auto;
             background-color: transparent;
@@ -38,7 +38,7 @@ $username = $_SESSION['username'];
 
         .dashboard {
             background-color: #fff;
-            padding: 5px;
+            padding: 10px;
             border-radius: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center; /* Center align the content */

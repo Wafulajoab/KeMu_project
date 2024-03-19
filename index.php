@@ -229,7 +229,7 @@
     .welcome-section {
     margin: 40px;
     padding: 40px;
-    background-color: darkgrey;
+    background-color:lavender;
     border-radius: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 70%; /* Set the width to 70% of the viewport */

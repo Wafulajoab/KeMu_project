@@ -153,7 +153,7 @@
             max-width: 20%;
             margin-top: 0rem;
             margin: 0px auto;
-            background-color: purple;
+            background-color: lavender;
             padding: 10px;
             position:absolute ;
             right: 0;
@@ -218,7 +218,7 @@
     <h1>Contact Us</h1>
     <div class="contact-info">
         <p><i class="fas fa-map-marker-alt"></i> Address: Meru County, Meru, Kenya</p>
-        <p><i class="fas fa-envelope"></i> Email: kemus@gmail.com</p>
+        <p><i class="fas fa-envelope"></i> Email: kemus863@gmail.com</p>
         <p><i class="fas fa-phone"></i> Phone: +254729-865-457</p>
         <p><i class="fas fa-fax"></i> Fax: +254767-678-890</p>
     </div>

@@ -178,10 +178,10 @@
         <a href='displaycontact.php'>Contacts</a>
     </div>
 
-    <div style='width: 80%; margin: 0 auto; padding-top: 50px;'> <!-- Adjust padding-top to accommodate navbar height -->
+    <div style='width: 90%; margin: 0 auto; padding-top: 10px;'> <!-- Adjust padding-top to accommodate navbar height -->
     <br><br><br><br>
     <div class="image">
-        <img src="kmu.jpeg" alt="KMU Logo" style="border-radius: 50px;">
+        <img src="kmu.jpeg" alt="KMU Logo" style="border-radius: 50%;">
     </div>
     <div class="container">
         <div class="left-section">

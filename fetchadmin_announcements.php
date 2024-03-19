@@ -21,7 +21,7 @@
       }
       .announcement {
         background-color: #fff;
-        padding: 20px;
+        padding: 25px;
         margin-bottom: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -58,7 +58,8 @@
 </nav>
 
 <div class="container">
-    <img src="kmu.jpeg" alt="KMU Logo" style="width: 15%; display: block; margin: 0 auto; padding-top: 0px; border-radius: 1000px;">
+<img src="kmu.jpeg" alt="KMU Logo" style="width: 15%; display: block; margin: 0 auto; padding-top: 0px; border-radius: 50%;">
+
     <?php
         // PHP code to fetch and display all announcements
         $servername = "localhost";

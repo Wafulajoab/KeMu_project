@@ -21,11 +21,11 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: rgb(237, 107, 241);
+  background: purple;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
-  border-radius: 50px;
+  border-radius: 0px;
 }
 .sidebar.open{
   width: 250px;
