@@ -288,45 +288,116 @@
         <h2>Normal Announcements</h2>
         <div class="announcements" id="announcement-container">
             <!-- Include PHP code to fetch announcements -->
-            <?php
-            // Include database connection file
-            $servername = "localhost";
-            $username = "root"; // Your database username
-            $password = ""; // Your database password
-            $dbname = "kemu"; // Your database name
+           <?php
+// Include database connection file
+$servername = "localhost";
+$username = "root"; // Your database username
+$password = ""; // Your database password
+$dbname = "kemu"; // Your database name
 
-            try {
-                $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
-                die();
-            }
+try {
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+    die();
+}
 
-            // Fetch announcements from the database
-            $stmt = $pdo->prepare("SELECT * FROM normal_announcements ORDER BY created_at DESC");
-            $stmt->execute();
-            $announcements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Handle reply form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reply_content']) && isset($_POST['announcement_id'])) {
+    $replyContent = $_POST['reply_content'];
+    $announcementId = $_POST['announcement_id'];
 
-            // Display announcements
-            foreach ($announcements as $announcement) {
-                echo '<div class="announcement">';
-                echo '<div class="profile-picture">';
-                echo '<img src="images/jmtech.jpg" alt="Profile Picture">';
-                echo '</div>';
-                echo '<div class="announcement-content">';
-                echo '<h3>' . $announcement['title'] . '</h3>';
-                echo '<p>' . $announcement['content'] . '</p>';
-                echo '<p>Date: ' . $announcement['created_at'] . '</p>'; // Display date and time
-                echo '<button class="reply-button" onclick="toggleReplyForm(this)">Reply</button>';
-                echo '<div class="reply-form">';
-                echo '<textarea placeholder="Write your reply here"></textarea>';
-                echo '<button type="button">Submit</button>';
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
-            }
-            ?>
+    // Insert reply into the database
+    $stmt = $pdo->prepare("INSERT INTO announcement_replies (announcement_id, reply_content) VALUES (:announcement_id, :reply_content)");
+    $stmt->bindParam(':announcement_id', $announcementId);
+    $stmt->bindParam(':reply_content', $replyContent);
+    $stmt->execute();
+}
+
+// Fetch announcements from the database
+$stmt = $pdo->prepare("SELECT * FROM normal_announcements ORDER BY created_at DESC");
+$stmt->execute();
+$announcements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Display announcements
+foreach ($announcements as $announcement) {
+    echo '<div class="announcement">';
+    echo '<div class="profile-picture">';
+    echo '<img src="images/jmtech.jpg" alt="Profile Picture">';
+    echo '</div>';
+    echo '<div class="announcement-content">';
+    echo '<h3>' . $announcement['title'] . '</h3>';
+    echo '<p>' . $announcement['content'] . '</p>';
+    echo '<p>Date: ' . $announcement['created_at'] . '</p>'; // Display date and time
+    echo '<button class="reply-button" onclick="toggleReplyForm(this)">Reply</button>';
+    echo '<div class="reply-form">';
+    echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="POST">';
+    echo '<input type="hidden" name="announcement_id" value="' . $announcement['id'] . '">';
+    echo '<textarea name="reply_content" placeholder="Write your reply here"></textarea>';
+    echo '<button type="submit">Submit</button>';
+    echo '</form>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+}
+?>
+
+
+
+
+<div class="announcements" id="announcement-container">
+    <?php
+    // Fetch announcements from the database
+    $stmt = $pdo->prepare("SELECT * FROM normal_announcements ORDER BY created_at DESC");
+    $stmt->execute();
+    $announcements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Display announcements
+    foreach ($announcements as $announcement) {
+        echo '<div class="announcement">';
+        echo '<div class="profile-picture">';
+        echo '<img src="images/jmtech.jpg" alt="Profile Picture">';
+        echo '</div>';
+        echo '<div class="announcement-content">';
+        echo '<h3>' . $announcement['title'] . '</h3>';
+        echo '<p>' . $announcement['content'] . '</p>';
+        echo '<p>Date: ' . $announcement['created_at'] . '</p>'; // Display date and time
+
+        // Fetch and display replies for this announcement
+        $replyStmt = $pdo->prepare("SELECT * FROM announcement_replies WHERE announcement_id = :announcement_id ORDER BY created_at ASC");
+        $replyStmt->bindParam(':announcement_id', $announcement['id']);
+        $replyStmt->execute();
+        $replies = $replyStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($replies as $reply) {
+            echo '<div class="reply">';
+            echo '<div class="profile-picture">';
+            echo '<img src="images/jmtt.jpg" alt="Profile Picture">';
+            echo '</div>';
+            echo '<div class="reply-content">';
+            echo '<p>' . $reply['reply_content'] . '</p>';
+            echo '<p>Reply Date: ' . $reply['created_at'] . '</p>'; // Display reply date and time
+            echo '</div>';
+            echo '</div>';
+        }
+
+        echo '<button class="reply-button" onclick="toggleReplyForm(this)">Reply</button>';
+        echo '<div class="reply-form">';
+        echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="POST">';
+        echo '<input type="hidden" name="announcement_id" value="' . $announcement['id'] . '">';
+        echo '<textarea name="reply_content" placeholder="Write your reply here"></textarea>';
+        echo '<button type="submit">Submit</button>';
+        echo '</form>';
+        echo '</div>';
+
+        echo '</div>'; // .announcement-content
+        echo '</div>'; // .announcement
+    }
+    ?>
+</div>
+
+
         </div>
     </div>
 
