@@ -195,6 +195,7 @@
 
         <div class="right-section">
             <h2 class="fixed-title">Recent Announcements</h2>
+            
             <?php
 // PHP code to fetch and display all announcements
 $servername = "localhost";

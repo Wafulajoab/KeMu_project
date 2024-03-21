@@ -15,11 +15,11 @@
             text-align: center;
         }
         form {
-            width: 30%;
+            width: 17.5%;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
-            border-radius: 8px;
+            border-radius: 25px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         label {
@@ -61,13 +61,16 @@
     </style>
 </head>
 <body>
-    <h2>Add User</h2>
-
-    <div class="image" style="text-align: center;">
-        <img src="kmu.jpeg" class="image2" alt="KeMU Image" style="max-width: 80px; height: auto;">
-    </div>
+   
 
     <form action="add_user_process.php" method="POST">
+
+  
+
+        <div class="image" style="text-align: center;">
+            <img src="kmu.jpeg" class="image2" alt="KeMU Image" style="max-width: 80px; height: auto;">
+        </div>
+        <h2>Add User</h2>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         

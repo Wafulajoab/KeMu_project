@@ -34,8 +34,8 @@ if ($result->num_rows > 0) {
     echo "</div>";
 
     echo "<div style='width: 80%; margin: 0 auto; padding-top: 70px;'>"; // Adjust padding-top to accommodate navbar height
-    echo "<div class='image' style='text-align: center;'>";
-    // Add your image here
+    echo "<div class='image' style='text-align: center; margin-top: 60px;'>";
+    echo "<img src='kmu.jpeg' class='image2' alt='KeMU Image' style='max-width: 5%; height:auto;'>";
     echo "</div>";
     echo "<h2 style='text-align: center;'>Admins List</h2>";
     echo "<table style='border-collapse: collapse; width: 80%; margin: 0 auto;'>";
@@ -102,7 +102,6 @@ $conn->close();
             font-weight: bold;
         }
     </style>
-
     <div class="footer">
         <p><span>Company.<strong>All Rights Reserved.</strong>Designed By <a href="jmtech.php">JMTech</a></span></p>
     </div>
