@@ -240,9 +240,6 @@
     transform: translate(-50%, -50%); /* Adjust position to center both horizontally and vertically */
 }
 
-
-
-
         </style>
     </head>
     <body>

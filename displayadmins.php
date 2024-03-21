@@ -32,10 +32,10 @@ if ($result->num_rows > 0) {
     echo "}";
     echo "</style>";
     echo "</div>";
-    
+
     echo "<div style='width: 80%; margin: 0 auto; padding-top: 70px;'>"; // Adjust padding-top to accommodate navbar height
     echo "<div class='image' style='text-align: center;'>";
-    echo "<img src='kmu.jpeg' class='image2' alt='KeMU Image' style='max-width: 5%; height: auto;'>";
+    // Add your image here
     echo "</div>";
     echo "<h2 style='text-align: center;'>Admins List</h2>";
     echo "<table style='border-collapse: collapse; width: 80%; margin: 0 auto;'>";
@@ -51,41 +51,30 @@ if ($result->num_rows > 0) {
         echo "<td style='border-right: 1px solid black; padding: 8px;'>" . $row["work_id"] . "</td>";
         echo "<td style='border-right: 1px solid black; padding: 8px;'>" . $row["rank"] . "</td>";
         echo "<td style='border-right: 1px solid black; padding: 8px;'>" . $row["username"] . "</td>";
-        echo "<td style='padding: 8px;'><a href='add_admin.php'>Add Admin</a> | <a href='delete_admin.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to delete this admin?\");'>Delete Admin</a></td>";
+
+        // Check if the admin is the Chief Security Officer (CSO)
+        if ($row["rank"] == "Chief Security Officer") {
+            echo "<td style='padding: 8px;'>Super User (CSO)</td>"; // Display as super user for CSO
+        } else {
+            // Display regular actions for other admins
+            echo "<td style='padding: 8px;'><a href='add_admin.php'>Add Admin</a> | <a href='delete_admin.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to delete this admin?\");'>Delete Admin</a></td>";
+        }
+
         echo "</tr>";
         $serial++;
     }
 
     echo "</table>";
+
+    // Add button link for super user (CSO) to add another admin
+    echo "<div style='text-align: center; margin-top: 20px;'>";
+    echo "<a href='add_admin.php' style='color: white; text-decoration: none; padding: 10px; font-weight: bold; background-color: purple; border-radius: 25px; margin: 25px; border: 2px solid white;'>Add Another Admin</a>";
+    echo "</div>";
+
     echo "</div>";
 } else {
     echo "No admins found.";
 }
-
-     //go back button
-     echo "<button onclick='goBack()' class='back-btn'>Go Back</button>";
-     echo "<style>
-         .back-btn {
-             background-color: purple;
-             color: white;
-             padding: 8px 12px;
-             border: none;
-             border-radius: 25px;
-             cursor: pointer;
-             margin-top: 20px; /* Adjust margin-top as needed */
-         }
-         .back-btn:hover {
-             background-color: green;
-         }
-     </style>";
-     
-     echo "<script>
-         function goBack() {
-             window.history.back();
-         }
-     </script>";
-
-     
 
 // Close connection
 $conn->close();
