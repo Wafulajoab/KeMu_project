@@ -289,7 +289,7 @@
         <!-- Popup -->
         <div class="popup" id="pop">
             <div class="sub-pop">
-                <p><i class="fas fa-user"></i> <a href="#">Profile</a></p>
+                <p><i class="fas fa-user"></i> <a href="profile.php">Profile</a></p>
                 <p><i class="fas fa-sign-out-alt"></i> <a href="logout.php">Logout</a></p>        
             </div>
         </div>
